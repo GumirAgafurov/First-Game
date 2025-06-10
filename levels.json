@@ -1,0 +1,326 @@
+{
+    "levels": [
+        {
+            "name": "Первый уровень",
+            "platforms": [
+                {
+                    "position": { "x": 0, "y": 150 },
+                    "width": 600,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 300, "y": 450 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 600, "y": 350 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 700, "y": 250 },
+                    "width": 150,
+                    "height": 15
+                }
+            ],
+            "apples": [
+                { "position": { "x": 150, "y": 500 } },
+                { "position": { "x": 350, "y": 400 } },
+                { "position": { "x": 650, "y": 300 } },
+                { "position": { "x": 200, "y": 250 } }
+            ],
+            "enemies": [
+                {
+                    "position": { "x": 555, "y": 250 },
+                    "speed": 2,
+                    "moveDistance": 100
+                }
+            ]
+        },
+        {
+            "name": "Второй уровень",
+            "platforms": [
+                {
+                    "position": { "x": 0, "y": 550 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 250, "y": 450 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 500, "y": 350 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 750, "y": 250 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 1000, "y": 200 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 500, "y": 700 },
+                    "width": 200,
+                    "height": 20
+                }
+            ],
+            "apples": [
+                { "position": { "x": 100, "y": 500 } },
+                { "position": { "x": 350, "y": 400 } },
+                { "position": { "x": 600, "y": 300 } },
+                { "position": { "x": 850, "y": 200 } },
+                { "position": { "x": 650, "y": 250 } }
+            ],
+            "enemies": [
+                {
+                    "position": { "x": 300, "y": 400 },
+                    "speed": 1.5,
+                    "moveDistance": 100
+                }
+            ]
+        },
+        {
+            "name": "Третий уровень",
+            "platforms": [
+                {
+                    "position": { "x": 0, "y": 550 },
+                    "width": 150,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 200, "y": 450 },
+                    "width": 150,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 400, "y": 550 },
+                    "width": 150,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 600, "y": 450 },
+                    "width": 150,
+                    "height": 20
+                }
+            ],
+            "apples": [
+                { "position": { "x": 75, "y": 500 } },
+                { "position": { "x": 275, "y": 400 } },
+                { "position": { "x": 475, "y": 500 } },
+                { "position": { "x": 675, "y": 400 } }
+            ],
+            "enemies": [
+                {
+                    "position": { "x": 250, "y": 400 },
+                    "speed": 1,
+                    "moveDistance": 100
+                }
+            ]
+        },
+        {
+            "name": "Лестница",
+            "difficulty": "easy",
+            "platforms": [
+                {
+                    "position": { "x": 0, "y": 550 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 250, "y": 450 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 500, "y": 350 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 750, "y": 250 },
+                    "width": 200,
+                    "height": 20
+                }
+            ],
+            "apples": [
+                { "position": { "x": 100, "y": 500 } },
+                { "position": { "x": 350, "y": 400 } },
+                { "position": { "x": 600, "y": 300 } },
+                { "position": { "x": 850, "y": 200 } }
+            ],
+            "enemies": [
+                {
+                    "position": { "x": 400, "y": 300 },
+                    "speed": 1,
+                    "moveDistance": 150
+                }
+            ]
+        },
+        {
+            "name": "Пирамида",
+            "difficulty": "easy",
+            "platforms": [
+                {
+                    "position": { "x": 0, "y": 550 },
+                    "width": 300,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 150, "y": 450 },
+                    "width": 200,
+                    "height": 20
+                },
+                {
+                    "position": { "x": 250, "y": 350 },
+                    "width": 100,
+                    "height": 20
+                }
+            ],
+            "apples": [
+                { "position": { "x": 150, "y": 500 } },
+                { "position": { "x": 250, "y": 400 } },
+                { "position": { "x": 300, "y": 300 } }
+            ],
+            "enemies": [
+                {
+                    "position": { "x": 200, "y": 400 },
+                    "speed": 1,
+                    "moveDistance": 100
+                }
+            ]
+        }
+    ],
+    "level1": {
+        "name": "Обучение",
+        "description": "Научись основам игры",
+        "playerStart": {
+            "x": 50,
+            "y": 400
+        },
+        "platforms": [
+            {
+                "x": 0,
+                "y": 500,
+                "width": 1000,
+                "height": 50,
+                "type": "ground"
+            },
+            {
+                "x": 200,
+                "y": 400,
+                "width": 100,
+                "height": 20,
+                "type": "normal"
+            },
+            {
+                "x": 400,
+                "y": 300,
+                "width": 100,
+                "height": 20,
+                "type": "normal"
+            },
+            {
+                "x": 600,
+                "y": 200,
+                "width": 100,
+                "height": 20,
+                "type": "normal"
+            }
+        ],
+        "apples": [
+            {
+                "x": 250,
+                "y": 350
+            },
+            {
+                "x": 450,
+                "y": 250
+            },
+            {
+                "x": 650,
+                "y": 150
+            }
+        ],
+        "monsters": []
+    },
+    "level2": {
+        "name": "Первое испытание",
+        "description": "Остерегайся монстров!",
+        "playerStart": {
+            "x": 50,
+            "y": 400
+        },
+        "platforms": [
+            {
+                "x": 0,
+                "y": 500,
+                "width": 1200,
+                "height": 50,
+                "type": "ground"
+            },
+            {
+                "x": 200,
+                "y": 400,
+                "width": 150,
+                "height": 20,
+                "type": "normal"
+            },
+            {
+                "x": 450,
+                "y": 300,
+                "width": 150,
+                "height": 20,
+                "type": "normal"
+            },
+            {
+                "x": 700,
+                "y": 200,
+                "width": 150,
+                "height": 20,
+                "type": "normal"
+            }
+        ],
+        "apples": [
+            {
+                "x": 250,
+                "y": 350
+            },
+            {
+                "x": 500,
+                "y": 250
+            },
+            {
+                "x": 750,
+                "y": 150
+            },
+            {
+                "x": 900,
+                "y": 450
+            }
+        ],
+        "monsters": [
+            {
+                "x": 300,
+                "y": 460,
+                "type": "walker",
+                "patrolDistance": 150,
+                "speed": 2
+            },
+            {
+                "x": 600,
+                "y": 460,
+                "type": "jumper",
+                "patrolDistance": 100,
+                "speed": 3
+            }
+        ]
+    }
+} 

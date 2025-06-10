@@ -1,0 +1,119 @@
+/* Мобильные стили */
+@media (max-width: 768px) {
+    /* Скрываем десктопные элементы */
+    .desktop-only {
+        display: none !important;
+    }
+
+    /* Показываем мобильные элементы */
+    .mobile-only {
+        display: block !important;
+    }
+
+    /* Мобильное управление */
+    #mobileControls {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 1000;
+    }
+
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: none;
+    }
+
+    .control-btn:active {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Мобильное меню */
+    #mobileMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+    }
+
+    .menu-btn {
+        width: 80%;
+        max-width: 300px;
+        padding: 15px;
+        margin: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .menu-btn:active {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Кнопка меню */
+    #menuBtn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        z-index: 1000;
+    }
+
+    /* Адаптация UI */
+    #gameCanvas {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    /* Скрываем мини-карту на мобильных */
+    #minimap {
+        display: none;
+    }
+
+    /* Адаптируем UI элементы */
+    .ui-element {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    /* Предотвращаем масштабирование */
+    * {
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+} 
