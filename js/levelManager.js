@@ -43,7 +43,9 @@ export class LevelManager {
         const savedProgress = localStorage.getItem('gameProgress');
         if (savedProgress) {
             const progress = JSON.parse(savedProgress);
-            this.currentLevelIndex = progress.currentLevel - 1;
+            this.currentLevelIndex = Math.max(0, progress.currentLevel - 1);
+        } else {
+            this.currentLevelIndex = 0;
         }
     }
 
@@ -63,7 +65,8 @@ export class LevelManager {
             console.error('No levels available');
             return null;
         }
-        return this.levels[levelNumber - 1] || null;
+        const index = Math.max(0, Math.min(levelNumber - 1, this.levels.length - 1));
+        return this.levels[index] || null;
     }
 
     async loadLevel(levelNumber) {
@@ -82,6 +85,7 @@ export class LevelManager {
         }
 
         this.currentLevelIndex = levelNumber - 1;
+        console.log('Loading level number:', levelNumber, 'Current index:', this.currentLevelIndex);
 
         // Имитируем загрузку ресурсов с прогресс-баром
         await this.simulateLoading();
@@ -105,6 +109,9 @@ export class LevelManager {
         level.enemies.forEach(enemy => {
             this.game.enemies.push(new Enemy(enemy, this.game.ctx));
         });
+
+        // Set required apples for the level
+        this.game.requiredApples = level.requiredApples || Math.ceil(this.game.apples.length * 0.7);
 
         // Set player position
         if (level.playerStart) {

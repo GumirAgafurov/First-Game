@@ -38,6 +38,7 @@ export class Game {
         this.playerVisible = false;
         this.soundEnabled = true;
         this.collectSound = null;
+        this.requiredApples = 3;
 
         // Initialize audio
         this.audio = new AudioManager();
@@ -136,7 +137,12 @@ export class Game {
         this.levelManager.loadLevels()
             .then(() => {
                 const levelData = this.levelManager.getCurrentLevel();
-                levelData ? this.loadLevel(levelData) : console.error('No level data');
+                if (levelData) {
+                    this.currentLevel = this.levelManager.currentLevelIndex + 1;
+                    this.loadLevel(levelData);
+                } else {
+                    console.error('No level data');
+                }
             })
             .catch(error => console.error('Level loading error:', error));
     }
@@ -160,7 +166,7 @@ export class Game {
             position: { x: 0, y: groundY },
             width: this.levelWidth,
             height: groundHeight,
-            color: '#4CAF50' // Зеленый цвет травы
+            color: '#4CAF50'
         }, this.ctx);
         this.platforms.push(grassPlatform);
         
@@ -170,7 +176,7 @@ export class Game {
                 position: { x: x, y: groundY - 10 },
                 width: 30,
                 height: 10,
-                color: '#45a049' // Темно-зеленый для декоративных элементов
+                color: '#45a049'
             }, this.ctx);
             this.platforms.push(grassDecoration);
         }
@@ -183,6 +189,10 @@ export class Game {
         // Reset player
         this.player.position = { x: 100, y: 100 };
         this.cameraX = 0;
+        
+        // Обновляем номер текущего уровня
+        this.currentLevel = this.levelManager.currentLevelIndex + 1;
+        console.log('Current level set to:', this.currentLevel);
         
         this.isLevelLoaded = true;
         this.playerVisible = true;
@@ -217,8 +227,10 @@ export class Game {
         this.checkEnemyCollision();
         
         // Check level completion
-        if (this.apples.every(apple => apple.collected)) {
+        const collectedApples = this.apples.filter(apple => apple.collected).length;
+        if (collectedApples >= this.requiredApples) {
             if (this.levelManager.nextLevel()) {
+                this.currentLevel = this.levelManager.currentLevelIndex + 1; // Обновляем номер текущего уровня
                 this.loadLevel(this.levelManager.getCurrentLevel());
             } else {
                 console.log('Game completed!');
@@ -362,8 +374,12 @@ export class Game {
         this.ctx.fillText(`🍎 Apples: ${this.score}`, 40, 50);
         this.ctx.fillText(`🏆 Level: ${this.currentLevel}`, 40, 85);
         
+        // Добавляем отображение прогресса сбора яблок
+        const collectedApples = this.apples.filter(apple => apple.collected).length;
+        this.ctx.fillText(`🍎 Progress: ${collectedApples}/${this.requiredApples}`, 40, 120);
+        
         // Progress bar
-        this.drawProgressBar(40, 100, (this.score % 100) * 2.3, 12, 6);
+        this.drawProgressBar(40, 140, (collectedApples / this.requiredApples) * 230, 12, 6);
         
         this.ctx.restore();
     }
@@ -571,9 +587,14 @@ export class Game {
     }
 
     startNewGame() {
+        // Сбрасываем прогресс
+        localStorage.removeItem('gameProgress');
+        localStorage.removeItem(`game_progress_${this.userId}`);
+        
+        // Сбрасываем состояние игры
         this.currentLevel = 1;
         this.score = 0;
-        localStorage.removeItem(`game_progress_${this.userId}`);
+        this.levelManager.resetProgress();
         
         // Reset game state
         this.platforms = [];
@@ -595,7 +616,7 @@ export class Game {
         // Start background music
         this.audio.playSound('background');
         
-        console.log('New game started');
+        console.log('New game started from level 1');
     }
 
     toggleSound(enabled) {
