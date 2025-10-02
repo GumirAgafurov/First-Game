@@ -48,6 +48,9 @@ export class Game {
         this.updateLevelBounds();
         this.player = new Player({ x: 100, y: 100 }, this.levelBounds, this.ctx);
         
+        // Mobile controller (will be set by GameManager)
+        this.mobileController = null;
+        
         // Game objects
         this.platforms = [];
         this.apples = [];
@@ -200,6 +203,11 @@ export class Game {
 
     update() {
         if (!this.isLevelLoaded) return;
+
+        // Update mobile controller if available
+        if (this.mobileController) {
+            this.mobileController.update();
+        }
 
         // Update player
         this.player.update(this.platforms);
@@ -532,7 +540,7 @@ export class Game {
         this.accumulator += deltaTime;
 
         while (this.accumulator >= this.timeStep) {
-            this.update(this.timeStep);
+            this.update();
             this.accumulator -= this.timeStep;
         }
 
@@ -629,6 +637,10 @@ export class Game {
 
     stop() {
         this.audio.stopAll();
+    }
+
+    setMobileController(mobileController) {
+        this.mobileController = mobileController;
     }
 }
 

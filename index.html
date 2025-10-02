@@ -210,17 +210,14 @@
             <div class="control-btn" id="rightBtn">→</div>
         </div>
 
-        <div id="menuBtn" class="mobile-only">☰</div>
+        <!-- Кнопка меню для мобильных устройств -->
+        <div id="menuBtn" class="mobile-only" onclick="toggleMainMenu()" ontouchend="toggleMainMenu()">☰</div>
+        
+        <!-- Кнопка меню для десктопа -->
+        <div id="desktopMenuBtn" class="desktop-only" onclick="toggleMainMenu()">☰</div>
 
-        <div id="mobileMenu" class="mobile-only">
-            <button class="menu-btn" id="resumeBtn">Продолжить</button>
-            <button class="menu-btn" id="restartBtn">Начать заново</button>
-            <button class="menu-btn" id="settingsBtn">Настройки</button>
-            <button class="menu-btn" id="exitBtn">Выйти</button>
-        </div>
-
-        <!-- Десктопные элементы -->
-        <div id="startScreen" class="desktop-only">
+        <!-- Единое главное меню для всех устройств -->
+        <div id="startScreen">
             <div id="main-menu" style="
                 position: fixed;
                 top: 0;
@@ -234,9 +231,10 @@
                 align-items: center;
                 z-index: 1000;
             ">
-                <button id="new-game-btn" class="menu-btn">Новая игра</button>
-                <button id="continue-btn" class="menu-btn" disabled>Продолжить</button>
-                <button id="settings-btn" class="menu-btn">Настройки</button>
+                <button id="new-game-btn" class="menu-btn" onclick="startNewGame()" ontouchend="startNewGame()">Новая игра</button>
+                <button id="continue-btn" class="menu-btn" disabled onclick="continueGame()" ontouchend="continueGame()">Продолжить</button>
+                <button id="settings-btn" class="menu-btn" onclick="showSettings()" ontouchend="showSettings()">Настройки</button>
+                <button id="back-to-game-btn" class="menu-btn" onclick="backToGame()" ontouchend="backToGame()" style="background: linear-gradient(to bottom, #666, #444);">Назад в игру</button>
             </div>
 
             <div id="settings-menu" style="
@@ -268,7 +266,7 @@
                     <input type="range" id="volume-slider" min="0" max="100" value="50" style="width: 100%; margin-top: 10px;">
                 </div>
                 
-                <button id="back-btn" class="menu-btn" style="margin-top: 40px;">Назад</button>
+                <button id="back-btn" class="menu-btn" style="margin-top: 40px;" onclick="backToMainMenu()" ontouchend="backToMainMenu()">Назад</button>
             </div>
 
             <div class="loading-indicator" id="loadingIndicator">
@@ -304,9 +302,19 @@
             // Наличие элементов
             const canvas = document.getElementById('gameCanvas');
             const mainMenu = document.getElementById('main-menu');
+            const mobileControls = document.getElementById('mobileControls');
+            const leftBtn = document.getElementById('leftBtn');
+            const rightBtn = document.getElementById('rightBtn');
+            const jumpBtn = document.getElementById('jumpBtn');
             
             console.log('Canvas element:', canvas ? 'found' : 'not found');
             console.log('Main menu element:', mainMenu ? 'found' : 'not found');
+            console.log('Mobile controls element:', mobileControls ? 'found' : 'not found');
+            console.log('Left button element:', leftBtn ? 'found' : 'not found');
+            console.log('Right button element:', rightBtn ? 'found' : 'not found');
+            console.log('Jump button element:', jumpBtn ? 'found' : 'not found');
+            console.log('Window width:', window.innerWidth);
+            console.log('Is mobile:', window.innerWidth <= 768);
             
             // Стили элементов
             if (canvas) {

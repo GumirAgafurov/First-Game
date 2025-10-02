@@ -15,6 +15,7 @@ class GameManager {
         // Инициализируем мобильное управление, если это мобильное устройство
         if (this.isMobile) {
             this.mobileController = new MobileController(this.game);
+            this.game.setMobileController(this.mobileController);
         }
 
         // Обработчики для кнопок меню
@@ -36,9 +37,11 @@ class GameManager {
             if (this.isMobile) {
                 // Переключаемся на мобильное управление
                 this.mobileController = new MobileController(this.game);
+                this.game.setMobileController(this.mobileController);
             } else {
                 // Отключаем мобильное управление
                 this.mobileController = null;
+                this.game.setMobileController(null);
             }
         }
     }

@@ -1,5 +1,6 @@
 import { Game } from './game.js';
 import { Settings } from './settings.js';
+import { MobileController } from './mobile.js';
 
 // Инициализация canvas
 const canvas = document.getElementById('gameCanvas');
@@ -41,6 +42,87 @@ try {
 
 // Глобальная переменная для игры
 let game = null;
+
+// Глобальные функции для inline обработчиков
+window.startNewGame = async function() {
+    console.log('startNewGame called');
+    const mainMenu = document.getElementById('main-menu');
+    if (mainMenu) {
+        mainMenu.style.display = 'none';
+        showLoadingScreen();
+        await simulateLoading();
+        if (game) {
+            game.start();
+        }
+        hideLoadingScreen();
+    }
+};
+
+window.continueGame = function() {
+    console.log('continueGame called');
+    const mainMenu = document.getElementById('main-menu');
+    if (mainMenu) {
+        mainMenu.style.display = 'none';
+        if (game) {
+            game.continue();
+        }
+    }
+};
+
+window.showSettings = function() {
+    console.log('showSettings called');
+    const mainMenu = document.getElementById('main-menu');
+    const settingsMenu = document.getElementById('settings-menu');
+    if (mainMenu && settingsMenu) {
+        mainMenu.style.display = 'none';
+        settingsMenu.style.display = 'flex';
+    }
+};
+
+window.backToMainMenu = function() {
+    console.log('backToMainMenu called');
+    const mainMenu = document.getElementById('main-menu');
+    const settingsMenu = document.getElementById('settings-menu');
+    if (mainMenu && settingsMenu) {
+        settingsMenu.style.display = 'none';
+        mainMenu.style.display = 'flex';
+    }
+};
+
+window.toggleMainMenu = function() {
+    console.log('toggleMainMenu called');
+    const mainMenu = document.getElementById('main-menu');
+    if (mainMenu) {
+        const isMenuOpen = mainMenu.style.display === 'flex';
+        mainMenu.style.display = isMenuOpen ? 'none' : 'flex';
+        console.log('Main menu display set to:', mainMenu.style.display);
+        
+        // Управляем игрой при открытии/закрытии меню
+        if (game) {
+            if (!isMenuOpen) {
+                // Меню открывается - ставим игру на паузу
+                game.pause();
+            } else {
+                // Меню закрывается - возобновляем игру
+                game.resume();
+            }
+        }
+    }
+};
+
+window.backToGame = function() {
+    console.log('backToGame called');
+    const mainMenu = document.getElementById('main-menu');
+    if (mainMenu) {
+        mainMenu.style.display = 'none';
+        console.log('Main menu hidden');
+        
+        // Возобновляем игру
+        if (game) {
+            game.resume();
+        }
+    }
+};
 
 // Функции для управления меню
 function showMainMenu() {
@@ -206,6 +288,9 @@ function loadAudio(src) {
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('DOM загружен');
 
+    // Ждем немного, чтобы все элементы точно загрузились
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     // Получаем все необходимые элементы
     const elements = {
         canvas: document.getElementById('gameCanvas'),
@@ -219,6 +304,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         volumeSlider: document.getElementById('volume-slider'),
         volumeValue: document.getElementById('volume-value')
     };
+
+    console.log('Found elements:', elements);
 
     // Проверяем наличие всех элементов
     const missingElements = Object.entries(elements)
@@ -240,9 +327,46 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Инициализация игры
     game = new Game(elements.canvas);
+    
+    // Инициализация мобильного контроллера
+    const isMobile = window.innerWidth <= 768;
+    console.log('Is mobile device:', isMobile);
+    
+    if (isMobile) {
+        console.log('Initializing mobile controller...');
+        const mobileController = new MobileController(game);
+        game.setMobileController(mobileController);
+        console.log('Mobile controller initialized');
+    }
 
-    // Обработчики событий
-    elements.newGameBtn.addEventListener('click', async () => {
+    // Обработчики событий для кнопок меню (поддержка touch и click)
+    const addMenuButtonHandler = (element, handler) => {
+        if (!element) {
+            console.warn('Menu button element not found');
+            return;
+        }
+        
+        console.log('Adding handlers to button:', element.id);
+        
+        // Добавляем обработчики для touch и click событий
+        element.addEventListener('click', (e) => {
+            console.log('Click event on:', element.id);
+            handler();
+        });
+        
+        element.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            console.log('Touch end event on:', element.id);
+            handler();
+        });
+        
+        // Предотвращаем двойное срабатывание
+        element.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+        });
+    };
+
+    addMenuButtonHandler(elements.newGameBtn, async () => {
         elements.mainMenu.style.display = 'none';
         showLoadingScreen();
         await simulateLoading();
@@ -250,17 +374,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         hideLoadingScreen();
     });
 
-    elements.continueBtn.addEventListener('click', () => {
+    addMenuButtonHandler(elements.continueBtn, () => {
         elements.mainMenu.style.display = 'none';
         game.continue();
     });
 
-    elements.settingsBtn.addEventListener('click', () => {
+    addMenuButtonHandler(elements.settingsBtn, () => {
         elements.mainMenu.style.display = 'none';
         elements.settingsMenu.style.display = 'flex';
     });
 
-    elements.backBtn.addEventListener('click', () => {
+    addMenuButtonHandler(elements.backBtn, () => {
         elements.settingsMenu.style.display = 'none';
         elements.mainMenu.style.display = 'flex';
     });
@@ -277,8 +401,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         game.getAudioManager().setVolume(value / 100);
     });
 
-    // Показываем главное меню при загрузке
-    elements.mainMenu.style.display = 'flex';
+    // Не показываем главное меню автоматически - только при нажатии кнопки меню
+    // elements.mainMenu.style.display = 'flex';
+    
+    // Обработчик изменения размера окна для переключения мобильного режима
+    window.addEventListener('resize', () => {
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile !== isMobile) {
+            console.log('Device type changed, reinitializing mobile controller...');
+            if (newIsMobile) {
+                const mobileController = new MobileController(game);
+                game.setMobileController(mobileController);
+            } else {
+                game.setMobileController(null);
+            }
+        }
+    });
 });
 
 // Обработчики событий клавиатуры

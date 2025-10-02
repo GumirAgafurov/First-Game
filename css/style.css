@@ -226,4 +226,53 @@ body {
 .settings-control input[type="range"] {
     width: 100%;
     margin-top: 10px;
+}
+
+/* Кнопка меню для десктопа */
+#desktopMenuBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid gold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 1000;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#desktopMenuBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+#desktopMenuBtn:active {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0.95);
+}
+
+/* Специальные стили для кнопки "Назад в игру" на десктопе */
+#back-to-game-btn {
+    background: linear-gradient(to bottom, #666, #444) !important;
+    border-color: #888 !important;
+}
+
+#back-to-game-btn:hover {
+    background: linear-gradient(to bottom, #777, #555) !important;
+}
+
+#back-to-game-btn:active {
+    background: linear-gradient(to bottom, #555, #333) !important;
 } 
