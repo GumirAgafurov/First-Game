@@ -100,9 +100,9 @@ export class Game {
             layer2: { img: new Image(), loaded: false }
         };
 
-        this.loadImage(this.backgrounds.main, 'image/background.png');
-        this.loadImage(this.backgrounds.layer1, 'image/BG1.png');
-        this.loadImage(this.backgrounds.layer2, 'image/BG2.png');
+        this.loadImage(this.backgrounds.main, './image/background.png');
+        this.loadImage(this.backgrounds.layer1, './image/BG1.png');
+        this.loadImage(this.backgrounds.layer2, './image/BG2.png');
     }
 
     loadImage(backgroundObj, src) {
