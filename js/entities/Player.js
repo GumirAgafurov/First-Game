@@ -43,7 +43,7 @@ export class Player {
         const sprites = [];
         for (let i = 1; i <= count; i++) {
             const sprite = new Image();
-            sprite.src = `image/player/${type}${i}.png`;
+            sprite.src = `image/Player/${type}${i}.png`;
             sprite.onerror = () => console.error(`Failed to load ${type} sprite ${i}`);
             sprites.push(sprite);
         }
