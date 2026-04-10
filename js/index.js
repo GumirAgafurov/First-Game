@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     elements.musicToggle.addEventListener('change', (e) => {
         settings.setMusicEnabled(e.target.checked);
-        game.audio.setMusicEnabled(e.target.checked);
+       game.audio.toggleSound(e.target.checked);
     });
 
     elements.volumeSlider.addEventListener('input', (e) => {
