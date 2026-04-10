@@ -391,14 +391,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     elements.musicToggle.addEventListener('change', (e) => {
         settings.setMusicEnabled(e.target.checked);
-        game.AudioManager().setMusicEnabled(e.target.checked);
+        game.audio().setMusicEnabled(e.target.checked);
     });
 
     elements.volumeSlider.addEventListener('input', (e) => {
         const value = e.target.value;
         elements.volumeValue.textContent = value;
         settings.setVolume(value);
-        game.AudioManager().setVolume(value / 100);
+        game.audio().setVolume(value / 100);
     });
 
     // Не показываем главное меню автоматически - только при нажатии кнопки меню
