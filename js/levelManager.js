@@ -118,11 +118,6 @@ export class LevelManager {
             this.game.player.position = { ...level.playerStart };
         }
 
-        // Show tutorial on first level
-        if (levelNumber === 1) {
-            this.game.owl.showTutorial('movement');
-        }
-
         // Скрываем экран загрузки
         this.hideLoadingScreen();
         
