@@ -220,7 +220,7 @@ export class OwlNPC {
         return this.showHint;
     }
 
-   showDialog() {
+      showDialog() {
     // Показываем туториал по движению (или любой другой)
     if (this.game.currentLevel === 1 && !this.tutorialShown) {
         this.showTutorial('movement');
@@ -229,9 +229,8 @@ export class OwlNPC {
         this.showTutorial('apples');
     }
 }
+}
 
-
-  
-    }
+    
 
     
