@@ -220,12 +220,15 @@ export class OwlNPC {
         return this.showHint;
     }
 
-    showDialog() {
-        this.dialogVisible = true;
-        // Скрываем диалог через 3 секунды
-        setTimeout(() => {
-            this.dialogVisible = false;
-        }, 3000);
+   showDialog() {
+    // Показываем туториал по движению (или любой другой)
+    if (this.game.currentLevel === 1 && !this.tutorialShown) {
+        this.showTutorial('movement');
+        this.tutorialShown = true;
+    } else {
+        this.showTutorial('apples');
+    }
+}
 
 
   
