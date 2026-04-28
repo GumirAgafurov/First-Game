@@ -225,6 +225,7 @@ export class Game {
         
         // Handle F key press
         if (this.keys.has('f') && !this.wasFKeyPressed && this.owl.showHint) {
+              console.log("F pressed, calling showDialog"); 
             this.owl.showDialog();
             this.wasFKeyPressed = true;
         } else if (!this.keys.has('f')) {
