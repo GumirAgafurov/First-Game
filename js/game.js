@@ -57,10 +57,10 @@ export class Game {
         this.enemies = [];
         
         // Initialize NPC
-        const groundY = this.canvas.height - 100;
-        this.owl = new OwlNPC(this);
-        const owlHeight = this.owl.sprite.frameHeight * this.owl.sprite.scale;
-        this.owl.setPosition(300, groundY - owlHeight);
+        this.owl = new OwlNPC(this);                     
+        const groundY = this.canvas.height - 100;        
+        const owlHeight = this.owl.sprite.frameHeight * this.owl.sprite.scale; 
+        this.owl.setPosition(300, groundY - owlHeight);  
 
         // Load assets
         this.initBackgrounds();
