@@ -217,5 +217,15 @@ export class OwlNPC {
         setTimeout(() => {
             this.dialogVisible = false;
         }, 3000);
+
+
+        if (this.showHint) {
+    ctx.font = "bold 20px Arial";
+    ctx.fillStyle = "white";
+    ctx.shadowColor = "black";
+    ctx.shadowBlur = 4;
+    ctx.fillText("Нажми F", screenX + 20, this.position.y - 20);
+    ctx.shadowColor = "transparent";
+};
     }
 } 
