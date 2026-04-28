@@ -8,12 +8,12 @@ import { AudioManager } from './audio.js';
 
 const GRAVITY = 0.5;
 const PLAYER_SPEED = 5;
-const JUMP_FORCE = -20;
+const JUMP_FORCE = -10;
 const LEVEL_LENGTH_MULTIPLIER = 1;
-const UI_WIDTH = 250;
-const UI_HEIGHT = 110;
-const MINIMAP_WIDTH = 250;
-const MINIMAP_HEIGHT = 150;
+const UI_WIDTH = 260;
+const UI_HEIGHT = 120;
+const MINIMAP_WIDTH = 260;
+const MINIMAP_HEIGHT = 160;
 
 export class Game {
     constructor(canvas) {
