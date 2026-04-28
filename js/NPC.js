@@ -13,7 +13,7 @@ export class OwlNPC {
             image: new Image(),
             frameWidth: 282, // Ширина одного кадра
             frameHeight: 282, // Высота кадра
-            scale: 2.5, // Масштаб отрисовки
+            scale: 2.0, // Масштаб отрисовки
             currentFrame: 0,
             totalFrames: 4,
             animationSpeed: 0.1,
