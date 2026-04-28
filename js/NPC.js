@@ -134,6 +134,15 @@ export class OwlNPC {
                 drawWidth, // destinationWidth
                 drawHeight // destinationHeight
             );
+
+                  if (this.showHint) {
+    ctx.font = "bold 20px Arial";
+    ctx.fillStyle = "white";
+    ctx.shadowColor = "black";
+    ctx.shadowBlur = 4;
+    ctx.fillText("Нажми F", screenX + 20, this.position.y - 20);
+    ctx.shadowColor = "transparent";
+}
         } catch (error) {
             console.error('Error drawing owl sprite:', error);
         }
@@ -219,13 +228,8 @@ export class OwlNPC {
         }, 3000);
 
 
-        if (this.showHint) {
-    ctx.font = "bold 20px Arial";
-    ctx.fillStyle = "white";
-    ctx.shadowColor = "black";
-    ctx.shadowBlur = 4;
-    ctx.fillText("Нажми F", screenX + 20, this.position.y - 20);
-    ctx.shadowColor = "transparent";
-};
+  
     }
+
+    
 } 
