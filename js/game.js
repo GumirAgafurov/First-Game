@@ -58,7 +58,7 @@ export class Game {
         
         // Initialize NPC
         this.owl = new OwlNPC(this);                     
-        const groundY = this.canvas.height - 100;        
+        const groundY = this.canvas.height;        
         const owlHeight = this.owl.sprite.frameHeight * this.owl.sprite.scale; 
         this.owl.setPosition(200, groundY - owlHeight);  
 
